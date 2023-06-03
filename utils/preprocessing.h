@@ -1,7 +1,9 @@
 #pragma once
-#include"to_bin.h"
 #include<iostream>
 #include<vector>
+#include<string>
+#include<bitset>
+#include<algorithm>
 
 class pre_process{
     private:
@@ -16,43 +18,7 @@ class pre_process{
         void set_message_box_pre();
         void set_message_box_post();
         std::string confirm_process();
+        std::string int_to_bit(int);
+        std::string encode_message(std::string);
 
 };
-
-void pre_process :: set_bin_message(std::string message){
-    message = encode_message(message);
-    bin_message = message;
-    message_box = message;
-    bin_len = message.length();
-    
-}
-
-void pre_process :: set_message_box_pre(){
-    int suffix_adj_len = PRE_BITS - bin_len - 1;
-    message_box += '1';
-    while (suffix_adj_len > 0){
-        message_box += '0';
-        suffix_adj_len--;
-    }
-
-}
-
-void pre_process :: set_message_box_post(){
-    std::string len_bits = int_to_bit(bin_len);
-
-    int bits = len_bits.length();
-    while (bits < POST_BITS){
-        len_bits.insert(len_bits.begin(), '0');
-        bits++;
-    }
-
-    message_box += len_bits;
-}
-
-std::string pre_process :: confirm_process(){
-    if (message_box.length() == 512){
-        return message_box;
-    }
-
-    return bin_message; // raise some error for indication TODO.
-}
