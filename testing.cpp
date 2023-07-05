@@ -7,7 +7,7 @@ using std::string;
 int main(int argc, char *argv[]){
 	hashing h;
 
-	h.object = "webb";
+	h.object = "prashboi";
 
 	cout<< h.get_hash();
 }
